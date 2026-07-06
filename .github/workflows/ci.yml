@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    name: Swift Build Check
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build (iOS Simulator)
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project PeakBody.xcodeproj \
+            -scheme PeakBody \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcbeautify --renderer github-actions
