@@ -1,0 +1,68 @@
+{
+  "agents": {
+    "requirements": {
+      "persona": "agents/requirements.md",
+      "model": "gpt-5.5",
+      "effort": "high",
+      "sandbox": "workspace-write",
+      "outputs": "docs/requirements",
+      "description": "要件定義のプロ / PdM。構想を要件定義書、ユーザーストーリー、受け入れ条件へ落とし込む。"
+    },
+    "architect": {
+      "persona": "agents/architect.md",
+      "model": "gpt-5.5",
+      "effort": "high",
+      "sandbox": "workspace-write",
+      "outputs": "docs/architecture",
+      "description": "モバイルアーキテクト / iOSテックリード。アーキテクチャ選定・モジュール構成・技術選定（設計担当）。"
+    },
+    "design": {
+      "persona": "agents/design.md",
+      "model": "gpt-5.5",
+      "effort": "medium",
+      "sandbox": "workspace-write",
+      "outputs": "docs/design",
+      "description": "プロダクトデザイナー。要件から画面設計、UIフロー、デザイン仕様を作る。"
+    },
+    "motion": {
+      "persona": "agents/motion.md",
+      "model": "gpt-5.5",
+      "effort": "medium",
+      "sandbox": "workspace-write",
+      "outputs": "docs/motion",
+      "description": "モーション / インタラクションデザイナー。アニメーション・マイクロインタラクション・画面遷移を仕様化。"
+    },
+    "backend": {
+      "persona": "agents/backend.md",
+      "model": "gpt-5.5",
+      "effort": "high",
+      "sandbox": "workspace-write",
+      "outputs": "docs/backend",
+      "description": "バックエンドエンジニア。必要性を判断し、API、データモデル、サーバー実装を担当する。"
+    },
+    "swift": {
+      "persona": "agents/swift.md",
+      "model": "gpt-5.5",
+      "effort": "high",
+      "sandbox": "workspace-write",
+      "outputs": "Xcodeプロジェクトおよび docs/ios",
+      "description": "Swift / iOSエンジニア。設計・デザイン・モーション・APIからSwiftUIアプリを実装する。"
+    },
+    "code-reviewer": {
+      "persona": "agents/code-reviewer.md",
+      "model": "gpt-5.5",
+      "effort": "high",
+      "sandbox": "workspace-write",
+      "outputs": "docs/reviews",
+      "description": "コードレビュアー。Swift実装をレビューし、バグ・設計逸脱・可読性・性能を所見化（修正は依頼ベース）。"
+    },
+    "qa": {
+      "persona": "agents/qa.md",
+      "model": "gpt-5.5",
+      "effort": "medium",
+      "sandbox": "workspace-write",
+      "outputs": "docs/qa",
+      "description": "QAエンジニア。受け入れ条件からテスト設計・テストケース・不具合報告を作成する。"
+    }
+  }
+}
