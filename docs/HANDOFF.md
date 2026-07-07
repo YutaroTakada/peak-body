@@ -40,3 +40,8 @@
 - 完了: 参考画像の06案を `PeakBody/Resources/SplashPeak06.png` として切り出し、起動時スプラッシュを追加（PeakBody/Views/SplashView.swift）。黒基調＋ネオン紫/青/ライムの共通テーマを追加（PeakBody/Views/PeakTheme.swift）し、ホーム、List/Form、カード、設定ボタンへ適用。Xcodeプロジェクトへ新規SwiftファイルとPNGリソースを登録。要件・画面要件・ユーザーストーリー・スコープ・iOS実装メモを更新
 - 依頼: designはスプラッシュのトリミング、表示時間、ネオン色の強さ、カード境界線の視認性を実機/Simulatorで確認。swiftはXcode本体環境で起動表示とホーム遷移、Bundle画像読み込みを確認。qaは起動直後のスプラッシュ、自動遷移、言語切替後のテーマ崩れを確認
 - 注意: スプラッシュ表示は約1.3秒で仮置き。現環境ではiOS Simulatorビルド不可のため、swiftc typecheck、plist/pbxproj lint、xcscheme XML、git diff --checkまで確認済み
+
+## [2026-07-07] design(UIUX計画) → PM / requirements / architect / design / swift / qa
+- 完了: カレンダーホーム×ダッシュボードへのUI/UX再設計計画書を作成（docs/design/calendar-dashboard-uiux-plan.md）。新3タブ構成（カレンダーホーム/ダッシュボード/履歴ハブ）、日セル記録インジケーター、SCR-01v2/03/05/WGT-01の画面仕様、Phase 0-3のワークパッケージ分解（WP-01〜33、担当・依存・受け入れ条件付き）を定義
+- 依頼: PMは計画書§11のQ-01〜Q-03（3タブ承認、ダッシュボードカード順、ストリーク定義）をユーザー確認後、Phase 0（WP-01 requirements文書更新、WP-02 architectデータ層設計、WP-03 designモック）から発注すること
+- 注意: ウィジェット（Phase 3）はApp Group移行が前提。既存の入力・詳細・履歴画面は無変更で流用し、変更はContentView/HomeView/RecordStoreに限定する方針。screens.mdのSQ-01/SQ-02は本計画で決定内容が変わる（§10参照）
