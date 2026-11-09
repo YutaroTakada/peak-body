@@ -45,3 +45,8 @@
 - 完了: カレンダーホーム×ダッシュボードへのUI/UX再設計計画書を作成（docs/design/calendar-dashboard-uiux-plan.md）。新3タブ構成（カレンダーホーム/ダッシュボード/履歴ハブ）、日セル記録インジケーター、SCR-01v2/03/05/WGT-01の画面仕様、Phase 0-3のワークパッケージ分解（WP-01〜33、担当・依存・受け入れ条件付き）を定義
 - 依頼: PMは計画書§11のQ-01〜Q-03（3タブ承認、ダッシュボードカード順、ストリーク定義）をユーザー確認後、Phase 0（WP-01 requirements文書更新、WP-02 architectデータ層設計、WP-03 designモック）から発注すること
 - 注意: ウィジェット（Phase 3）はApp Group移行が前提。既存の入力・詳細・履歴画面は無変更で流用し、変更はContentView/HomeView/RecordStoreに限定する方針。screens.mdのSQ-01/SQ-02は本計画で決定内容が変わる（§10参照）
+
+## [2026-11-09 22:13] design / swift → design / swift / qa / requirements
+- 完了: デザイン一新のPR1。MetaのAstryx（neutralテーマ、コミット fe174dd、MIT）を参考にデザイン仕様を作成（docs/design/design-spec.md）。色（ライト／ダーク）・余白・角丸・影・文字の役割のトークン層を追加（PeakBody/DesignSystem/PeakColorTokens.swift, PeakLayoutTokens.swift, PeakTypography.swift）し、Xcodeプロジェクトの DesignSystem グループとSourcesへ登録。FR-8 / Q-18 ほか「黒×ネオン」「ダーク前提」の要件をニュートラル系のライト／ダーク両対応へ書き換え（docs/requirements/requirements.md, scope.md, screens.md, user-stories.md。2026-11-09 ユーザー承認）。カレンダー計画書にはビジュアルは design-spec.md に従う旨の注記のみ追加。PeakTheme.swift には移行コメントのみ追加
+- 依頼: swiftはPR2で共通部品（カード、数値表示、空状態、ボタン、設定入口）をトークンだけで作る。PR3で外枠とホームを置き換え、.preferredColorScheme(.dark) を削除。designは記録種別の色（design-spec.md §2.5、仮置き）とスプラッシュ画像の扱いを決める。qaはPR3以降でライト／ダーク両方とDynamic Typeの表示を確認
+- 注意: 本PRでは画面の見た目は変えていない（新トークンは未使用）。色はUIColorのdynamicProviderで実装（Asset Catalogは未使用）。Linux環境のためxcodebuild不可で、ビルド確認はCI（macOS）に依存。Astryxの値を移植したファイルにはMIT著作権表示を記載。PR3〜PR4の間は記録タブがライトで旧テーマのままになるため、その間はTestFlightへ配信しない仮置き

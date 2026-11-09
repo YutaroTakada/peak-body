@@ -1,5 +1,10 @@
 import SwiftUI
 
+// 移行メモ（2026-11-09）: 黒×ネオンの PeakTheme は廃止予定。
+// 新しい画面・部品は PeakBody/DesignSystem/ のトークン（PeakColor / PeakSpacing /
+// PeakRadius / PeakShadow / PeakTypography）を使う。置き換えと
+// `.preferredColorScheme(.dark)` の削除は docs/design/design-spec.md の移行計画 PR3〜PR4 で行い、
+// すべての参照が無くなった時点でこのファイルを削除する。
 enum PeakTheme {
     static let background = Color(red: 0.015, green: 0.017, blue: 0.025)
     static let surface = Color.white.opacity(0.055)
