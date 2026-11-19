@@ -23,6 +23,9 @@
 		100000000000000000000114 /* PeakTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000017 /* PeakTheme.swift */; };
 		100000000000000000000115 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000018 /* SplashView.swift */; };
 		100000000000000000000116 /* SplashPeak06.png in Resources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000019 /* SplashPeak06.png */; };
+		100000000000000000000117 /* PeakColorTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000020 /* PeakColorTokens.swift */; };
+		100000000000000000000118 /* PeakLayoutTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000021 /* PeakLayoutTokens.swift */; };
+		100000000000000000000119 /* PeakTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000022 /* PeakTypography.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,9 @@
 		100000000000000000000017 /* PeakTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakTheme.swift; sourceTree = "<group>"; };
 		100000000000000000000018 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		100000000000000000000019 /* SplashPeak06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SplashPeak06.png; sourceTree = "<group>"; };
+		100000000000000000000020 /* PeakColorTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakColorTokens.swift; sourceTree = "<group>"; };
+		100000000000000000000021 /* PeakLayoutTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakLayoutTokens.swift; sourceTree = "<group>"; };
+		100000000000000000000022 /* PeakTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakTypography.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +81,7 @@
 				100000000000000000000305 /* Stores */,
 				100000000000000000000306 /* Services */,
 				100000000000000000000309 /* Localization */,
+				100000000000000000000310 /* DesignSystem */,
 				100000000000000000000307 /* Views */,
 				100000000000000000000308 /* Resources */,
 				100000000000000000000013 /* PeakBody.entitlements */,
@@ -145,6 +152,16 @@
 				100000000000000000000019 /* SplashPeak06.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		100000000000000000000310 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				100000000000000000000020 /* PeakColorTokens.swift */,
+				100000000000000000000021 /* PeakLayoutTokens.swift */,
+				100000000000000000000022 /* PeakTypography.swift */,
+			);
+			path = DesignSystem;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +249,9 @@
 				100000000000000000000113 /* SettingsView.swift in Sources */,
 				100000000000000000000114 /* PeakTheme.swift in Sources */,
 				100000000000000000000115 /* SplashView.swift in Sources */,
+				100000000000000000000117 /* PeakColorTokens.swift in Sources */,
+				100000000000000000000118 /* PeakLayoutTokens.swift in Sources */,
+				100000000000000000000119 /* PeakTypography.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
