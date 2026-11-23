@@ -1,10 +1,11 @@
 import SwiftUI
 
-// 移行メモ（2026-11-09）: 黒×ネオンの PeakTheme は廃止予定。
+// 移行メモ（2026-11-23）: 黒×ネオンの PeakTheme は廃止予定。
 // 新しい画面・部品は PeakBody/DesignSystem/ のトークン（PeakColor / PeakSpacing /
-// PeakRadius / PeakShadow / PeakTypography）を使う。置き換えと
-// `.preferredColorScheme(.dark)` の削除は docs/design/design-spec.md の移行計画 PR3〜PR4 で行い、
-// すべての参照が無くなった時点でこのファイルを削除する。
+// PeakRadius / PeakShadow / PeakTypography）を使う。
+// PR3 で画面の背景修飾子をトークンへ切り替え、`.preferredColorScheme(.dark)` を削除した。
+// 残る参照はスプラッシュ（SplashView.swift）だけ。扱いは design-spec.md §8 PR6 で決め、
+// 参照が無くなった時点でこのファイルを削除する。
 enum PeakTheme {
     static let background = Color(red: 0.015, green: 0.017, blue: 0.025)
     static let surface = Color.white.opacity(0.055)
@@ -36,10 +37,8 @@ enum PeakTheme {
 struct PeakScreenBackground: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .background(PeakTheme.backgroundGradient.ignoresSafeArea())
-            .foregroundStyle(PeakTheme.primaryText)
-            .tint(PeakTheme.acidLime)
-            .preferredColorScheme(.dark)
+            .background(PeakColor.background.ignoresSafeArea())
+            .tint(PeakColor.accent)
     }
 }
 
@@ -47,40 +46,7 @@ struct PeakScrollableSurface: ViewModifier {
     func body(content: Content) -> some View {
         content
             .scrollContentBackground(.hidden)
-            .background(PeakTheme.backgroundGradient)
-    }
-}
-
-struct PeakNeonGroupBoxStyle: GroupBoxStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            configuration.label
-                .font(.headline)
-                .foregroundStyle(PeakTheme.primaryText)
-
-            configuration.content
-        }
-        .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(PeakTheme.surface)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .stroke(
-                            LinearGradient(
-                                colors: [
-                                    PeakTheme.electricPurple.opacity(0.55),
-                                    PeakTheme.neonBlue.opacity(0.3),
-                                    PeakTheme.border
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            ),
-                            lineWidth: 1
-                        )
-                )
-                .shadow(color: PeakTheme.electricPurple.opacity(0.18), radius: 18, y: 8)
-        )
+            .background(PeakColor.background)
     }
 }
 

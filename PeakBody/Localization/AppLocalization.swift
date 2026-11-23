@@ -114,6 +114,27 @@ enum L10nKey: String {
     case setsSuffix
     case minutesSuffix
     case hoursSuffix
+    case calendar
+    case dashboard
+    case today
+    case previousMonth
+    case nextMonth
+    case notRecorded
+    case latestAt
+    case protein
+    case fat
+    case carbs
+    case exercisesSuffix
+    case sessionsSuffix
+    case activeEnergyTitle
+    case noHealthData
+    case healthEnergyNote
+    case exerciseTimeValue
+    case sleepValue
+    case dashboardPlaceholder
+    case recordsExist
+    case noRecords
+    case listSeparator
 }
 
 @MainActor
@@ -242,7 +263,28 @@ private extension AppLocalization {
             .benchPress: "ベンチプレス",
             .setsSuffix: "%dセット",
             .minutesSuffix: "%@分",
-            .hoursSuffix: "%@時間"
+            .hoursSuffix: "%@時間",
+            .calendar: "カレンダー",
+            .dashboard: "ダッシュボード",
+            .today: "今日",
+            .previousMonth: "前の月",
+            .nextMonth: "次の月",
+            .notRecorded: "未記録",
+            .latestAt: "最新 %@",
+            .protein: "タンパク質",
+            .fat: "脂質",
+            .carbs: "炭水化物",
+            .exercisesSuffix: "%d種目",
+            .sessionsSuffix: "%dセッション",
+            .activeEnergyTitle: "消費カロリー",
+            .noHealthData: "データなし",
+            .healthEnergyNote: "ヘルスケアの値です。筋トレの記録とは別に扱います",
+            .exerciseTimeValue: "運動 %@分",
+            .sleepValue: "睡眠 %@時間",
+            .dashboardPlaceholder: "体重、摂取カロリー、タンパク質、筋トレボリュームの推移グラフは次の更新で追加します。",
+            .recordsExist: "%@の記録あり",
+            .noRecords: "記録なし",
+            .listSeparator: "・"
         ],
         .en: [
             .appName: "Peak Body",
@@ -331,7 +373,28 @@ private extension AppLocalization {
             .benchPress: "Bench Press",
             .setsSuffix: "%d sets",
             .minutesSuffix: "%@ min",
-            .hoursSuffix: "%@ hr"
+            .hoursSuffix: "%@ hr",
+            .calendar: "Calendar",
+            .dashboard: "Dashboard",
+            .today: "Today",
+            .previousMonth: "Previous month",
+            .nextMonth: "Next month",
+            .notRecorded: "Not recorded",
+            .latestAt: "Latest %@",
+            .protein: "Protein",
+            .fat: "Fat",
+            .carbs: "Carbs",
+            .exercisesSuffix: "%d exercises",
+            .sessionsSuffix: "%d sessions",
+            .activeEnergyTitle: "Active Energy",
+            .noHealthData: "No data",
+            .healthEnergyNote: "From Apple Health. Kept separate from your workout records",
+            .exerciseTimeValue: "Exercise %@ min",
+            .sleepValue: "Sleep %@ hr",
+            .dashboardPlaceholder: "Trend charts for weight, calories, protein, and workout volume will be added in the next update.",
+            .recordsExist: "Recorded: %@",
+            .noRecords: "No records",
+            .listSeparator: ", "
         ]
     ]
 }

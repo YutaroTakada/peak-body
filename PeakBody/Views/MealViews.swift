@@ -1,16 +1,23 @@
 import SwiftUI
 
+/// 日詳細から開く、選択日の一覧（SCR-20。2026-11-18 以降は選択日の記録だけを表示する）
 struct MealListView: View {
     @EnvironmentObject private var recordStore: RecordStore
     @EnvironmentObject private var localization: AppLocalization
     @State private var showingForm = false
 
+    let day: Date
+
+    private var records: [MealRecord] {
+        recordStore.meals(on: day)
+    }
+
     var body: some View {
         List {
-            if recordStore.meals.isEmpty {
-                EmptyRecordView(text: localization.text(.noMealRecords), systemImage: "fork.knife")
+            if records.isEmpty {
+                EmptyRecordView(text: localization.text(.mealNotRecorded), systemImage: "fork.knife")
             } else {
-                ForEach(recordStore.meals) { meal in
+                ForEach(records) { meal in
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
                             Text(localization.text(meal.mealType.localizationKey))
@@ -28,8 +35,9 @@ struct MealListView: View {
                     .accessibilityElement(children: .combine)
                 }
                 .onDelete { offsets in
-                    for index in offsets {
-                        recordStore.deleteMeal(recordStore.meals[index])
+                    let targets = offsets.map { records[$0] }
+                    for record in targets {
+                        recordStore.deleteMeal(record)
                     }
                 }
             }
@@ -47,7 +55,7 @@ struct MealListView: View {
         }
         .sheet(isPresented: $showingForm) {
             NavigationStack {
-                MealFormView(initialDate: Date())
+                MealFormView(initialDate: recordEntryDate(on: day))
             }
         }
     }

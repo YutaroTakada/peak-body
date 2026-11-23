@@ -1,16 +1,23 @@
 import SwiftUI
 
+/// 日詳細から開く、選択日の一覧（SCR-10。2026-11-18 以降は選択日の記録だけを表示する）
 struct WorkoutListView: View {
     @EnvironmentObject private var recordStore: RecordStore
     @EnvironmentObject private var localization: AppLocalization
     @State private var showingForm = false
 
+    let day: Date
+
+    private var records: [WorkoutSession] {
+        recordStore.workouts(on: day)
+    }
+
     var body: some View {
         List {
-            if recordStore.workouts.isEmpty {
-                EmptyRecordView(text: localization.text(.noWorkoutRecords), systemImage: "figure.strengthtraining.traditional")
+            if records.isEmpty {
+                EmptyRecordView(text: localization.text(.workoutNotRecorded), systemImage: "figure.strengthtraining.traditional")
             } else {
-                ForEach(recordStore.workouts) { workout in
+                ForEach(records) { workout in
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
                             Text(PBFormat.dateTime(workout.performedAt, language: localization.language))
@@ -28,8 +35,9 @@ struct WorkoutListView: View {
                     .accessibilityElement(children: .combine)
                 }
                 .onDelete { offsets in
-                    for index in offsets {
-                        recordStore.deleteWorkout(recordStore.workouts[index])
+                    let targets = offsets.map { records[$0] }
+                    for record in targets {
+                        recordStore.deleteWorkout(record)
                     }
                 }
             }
@@ -47,7 +55,7 @@ struct WorkoutListView: View {
         }
         .sheet(isPresented: $showingForm) {
             NavigationStack {
-                WorkoutFormView(initialDate: Date())
+                WorkoutFormView(initialDate: recordEntryDate(on: day))
             }
         }
     }

@@ -45,17 +45,18 @@ struct SettingsAccessButtonModifier: ViewModifier {
                 Button {
                     sheet = .settings
                 } label: {
-                    Image(systemName: "gearshape.fill")
-                        .font(.title3)
-                        .frame(width: 48, height: 48)
-                        .background(.thinMaterial, in: Circle())
-                        .shadow(radius: 6, y: 2)
+                    Image(systemName: "gearshape")
+                        .font(PeakTypography.heading)
+                        .foregroundStyle(PeakColor.textPrimary)
+                        .frame(width: PeakSize.minTapTarget, height: PeakSize.minTapTarget)
+                        .background(PeakColor.surfaceRaised, in: Circle())
+                        .overlay(Circle().stroke(PeakColor.border, lineWidth: PeakSize.borderWidth))
+                        .peakShadow(.med)
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel(localization.text(.settings))
-                .foregroundStyle(PeakTheme.primaryText)
-                .padding(.leading, 16)
-                .padding(.bottom, 72)
+                .padding(.leading, PeakSpacing.md)
+                .padding(.bottom, PeakSpacing.md)
             }
             .sheet(item: $sheet) { _ in
                 NavigationStack {
