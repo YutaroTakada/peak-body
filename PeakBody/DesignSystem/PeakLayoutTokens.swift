@@ -50,6 +50,10 @@ enum PeakSize {
     /// タップ領域の最小値。Apple HIG の 44pt。Astryx の element サイズ（28〜36）は
     /// Web 向けのため採用せず、タップできる要素は必ずこの値以上にする。
     static let minTapTarget: CGFloat = 44
+    /// カレンダーの日付の丸（今日の枠・選択日の塗り）の直径。Dynamic Type に合わせて拡大する基準値。
+    static let calendarDayMarker: CGFloat = 32
+    /// カレンダーの記録の印（小さな点）の直径
+    static let recordDot: CGFloat = 4
 }
 
 /// 影の1層。blur は CSS の値、SwiftUI の radius は blur / 2 で近似する。

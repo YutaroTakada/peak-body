@@ -1,16 +1,23 @@
 import SwiftUI
 
+/// 日詳細から開く、選択日の一覧（SCR-30。2026-11-18 以降は選択日の記録だけを表示する）
 struct BodyWeightListView: View {
     @EnvironmentObject private var recordStore: RecordStore
     @EnvironmentObject private var localization: AppLocalization
     @State private var showingForm = false
 
+    let day: Date
+
+    private var records: [BodyWeightRecord] {
+        recordStore.bodyWeights(on: day)
+    }
+
     var body: some View {
         List {
-            if recordStore.bodyWeights.isEmpty {
-                EmptyRecordView(text: localization.text(.noBodyWeightRecords), systemImage: "scalemass")
+            if records.isEmpty {
+                EmptyRecordView(text: localization.text(.bodyWeightNotRecorded), systemImage: "scalemass")
             } else {
-                ForEach(recordStore.bodyWeights) { record in
+                ForEach(records) { record in
                     VStack(alignment: .leading, spacing: 4) {
                         Text(PBFormat.weight(record.weightKg))
                             .font(.headline)
@@ -26,8 +33,9 @@ struct BodyWeightListView: View {
                     .accessibilityElement(children: .combine)
                 }
                 .onDelete { offsets in
-                    for index in offsets {
-                        recordStore.deleteBodyWeight(recordStore.bodyWeights[index])
+                    let targets = offsets.map { records[$0] }
+                    for record in targets {
+                        recordStore.deleteBodyWeight(record)
                     }
                 }
             }
@@ -45,7 +53,7 @@ struct BodyWeightListView: View {
         }
         .sheet(isPresented: $showingForm) {
             NavigationStack {
-                BodyWeightFormView(initialDate: Date())
+                BodyWeightFormView(initialDate: recordEntryDate(on: day))
             }
         }
     }

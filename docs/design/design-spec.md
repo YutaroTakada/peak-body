@@ -81,6 +81,8 @@
 | `PeakColor.recordMeal` | 食事 | `#EB6E00` | dataCategoricalOrange |
 | `PeakColor.recordWorkout` | 筋トレ | `#0171E3` | dataCategoricalBlue |
 
+> 2026-11-23 PR3: カレンダーの記録の印には上の3色を使わないことにした。印は1色（`textSecondary`）の小さな点で、位置で種類を分ける（左=体重、中=食事、右=筋トレ）。強調色を1色にする規則（app-ui-design §4）と、色だけに頼らない規則（§7-6）に合わせるため。上の3色をPR5の推移グラフで使うかは、PR5の着手前に決める（仮置き: グラフも1色にし、指標名で区別する）。
+
 ## 3. 余白（`PeakSpacing`）
 
 4ptグリッド。Astryx の `space` から使う段だけを名前付きで持つ。
@@ -109,6 +111,15 @@
 | `page` | 28 | page | シートなど画面単位の面 |
 
 完全な丸（Astryx: full）は数値ではなく `Capsule()` / `Circle()` を使う。今の `PeakTheme` の22や14は廃止する。
+
+### 4.1 サイズ（`PeakSize`）
+
+| トークン | 値 | 用途 |
+|---|---|---|
+| `borderWidth` | 1 | 境界線 |
+| `minTapTarget` | 44 | タップ領域の最小値 |
+| `calendarDayMarker` | 32 | カレンダーの日付の丸（今日の枠、選択日の塗り）。`@ScaledMetric` で Dynamic Type に合わせて拡大する |
+| `recordDot` | 4 | カレンダーの記録の印 |
 
 ## 5. 影（`PeakShadow`）
 
@@ -163,8 +174,18 @@
 | PR5 | ダッシュボード: Swift Chartsで FR-5.2 の4グラフ（体重、摂取カロリー、タンパク質、筋トレボリューム）と7／30／90日切り替え | あり |
 | PR6 | 残りのドキュメント整合（`calendar-dashboard-uiux-plan.md` の色の記述、`docs/ios/implementation.md`、スプラッシュ画像の扱い） | 判断次第 |
 
+### 8.0 進捗
+
+| PR | 状態 |
+|---|---|
+| PR1 | マージ済み（#2、2026-11-18） |
+| 要件のシンプル化（docs） | マージ済み（#3、2026-11-18） |
+| PR2 + PR3 | 1本のPR（ブランチ `feature/calendar-shell`、2026-11-23）で実装。共通部品（`PeakCard`、`SummaryMetricView`、`EmptyRecordView`、`PeakPrimaryButtonStyle`、`PeakSecondaryButtonStyle`、`PeakIconButton`）、2タブ、月間カレンダー、日詳細、ダッシュボードの仮画面、外観の固定の削除。画面の背景の修飾子（`peakScreenBackground` / `peakScrollableSurface`）もトークンへ切り替え、PR4までの間も入力フォームと設定がライトモードで読めるようにした |
+| PR4〜PR6 | 未着手 |
+
 ### 8.1 要確認
 
 - スプラッシュ画像（`SplashPeak06.png`）はネオンの山型グラフで、新方針と合わない。差し替えるか、当面残すかはPR6までに決める（仮置き: 当面残す）。
 - 記録種別の色（§2.5）はPR3で実機・Simulatorのライト／ダーク両方で確認して確定する。
-- PR3で外観の固定を外すと、PR4までの間は入力フォームと設定がライトモードで旧テーマのまま表示される。PR3とPR4の間ではTestFlightへ配信しない（仮置き）。
+- PR3で外観の固定を外した。背景の修飾子はトークンへ切り替えたので入力フォームと設定はライト／ダークとも読めるが、行の余白や文字の役割はまだ旧来のまま（PR4で移行）。PR3とPR4の間ではTestFlightへ配信しない（仮置き）。
+- スプラッシュ（`SplashView.swift`）は `PeakTheme` の黒いグラデーションと色付きの影を使ったまま。ライトモードでは黒いスプラッシュの後に明るい画面へ切り替わる。PR6で扱いを決める。

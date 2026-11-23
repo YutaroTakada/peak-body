@@ -29,6 +29,20 @@ enum PBFormat {
         return formatter
     }()
 
+    private static let japaneseMonthTitle: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.dateFormat = "yyyy年M月"
+        return formatter
+    }()
+
+    private static let englishMonthTitle: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.dateFormat = "MMMM yyyy"
+        return formatter
+    }()
+
     static let time: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
@@ -41,6 +55,25 @@ enum PBFormat {
             return japaneseDateHeader.string(from: date)
         case .en:
             return englishDateHeader.string(from: date)
+        }
+    }
+
+    static func monthTitle(_ date: Date, language: AppLanguage) -> String {
+        switch language {
+        case .ja:
+            return japaneseMonthTitle.string(from: date)
+        case .en:
+            return englishMonthTitle.string(from: date)
+        }
+    }
+
+    /// 曜日の1文字表記（日曜始まりの7つ）。並べ替えは呼び出し側で週の開始曜日に合わせる。
+    static func veryShortWeekdaySymbols(language: AppLanguage) -> [String] {
+        switch language {
+        case .ja:
+            return japaneseMonthTitle.veryShortWeekdaySymbols
+        case .en:
+            return englishMonthTitle.veryShortWeekdaySymbols
         }
     }
 

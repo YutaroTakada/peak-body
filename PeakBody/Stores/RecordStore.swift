@@ -34,6 +34,21 @@ final class RecordStore: ObservableObject {
         )
     }
 
+    /// カレンダーの日セル用。期間内の各日（その日の0時をキー）に、どの種類の記録があるかを返す。
+    func recordFlags(in interval: DateInterval) -> [Date: DayRecordFlags] {
+        var flags: [Date: DayRecordFlags] = [:]
+        for record in bodyWeights where interval.contains(record.measuredAt) {
+            flags[calendar.startOfDay(for: record.measuredAt), default: DayRecordFlags()].hasBodyWeight = true
+        }
+        for record in meals where interval.contains(record.eatenAt) {
+            flags[calendar.startOfDay(for: record.eatenAt), default: DayRecordFlags()].hasMeal = true
+        }
+        for record in workouts where interval.contains(record.performedAt) {
+            flags[calendar.startOfDay(for: record.performedAt), default: DayRecordFlags()].hasWorkout = true
+        }
+        return flags
+    }
+
     func bodyWeights(on date: Date) -> [BodyWeightRecord] {
         bodyWeights
             .filter { calendar.isDate($0.measuredAt, inSameDayAs: date) }
@@ -142,6 +157,13 @@ final class RecordStore: ObservableObject {
             return false
         }
     }
+}
+
+/// ある日に記録がある種類。表示用で、保存はしない。
+struct DayRecordFlags: Equatable {
+    var hasBodyWeight = false
+    var hasMeal = false
+    var hasWorkout = false
 }
 
 private struct PersistedRecords: Codable {

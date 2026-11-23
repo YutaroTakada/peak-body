@@ -30,8 +30,14 @@ final class HealthKitService: ObservableObject {
     var summary: HealthDailySummary?
     @Published
     var isLoading = false
+    /// 利用者が連携を始めたかどうか（オン／オフだけ）を端末内に保存する。
+    /// HealthKit の値そのものは保存しない（FR-5.3）。
     @Published
-    var isEnabled = false
+    var isEnabled: Bool {
+        didSet {
+            UserDefaults.standard.set(isEnabled, forKey: Self.enabledStorageKey)
+        }
+    }
     @Published
     var lastErrorKey: L10nKey?
 
@@ -41,8 +47,11 @@ final class HealthKitService: ObservableObject {
     private let healthStore: HKHealthStore
     #endif
 
+    private static let enabledStorageKey = "healthKit.isEnabled"
+
     init(calendar: Calendar = .autoupdatingCurrent) {
         self.calendar = calendar
+        _isEnabled = Published(initialValue: UserDefaults.standard.bool(forKey: Self.enabledStorageKey))
         #if canImport(HealthKit)
         self.healthStore = HKHealthStore()
         #endif

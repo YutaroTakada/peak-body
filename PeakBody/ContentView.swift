@@ -7,34 +7,21 @@ struct ContentView: View {
         TabView {
             NavigationStack {
                 HomeView()
+                    .settingsAccessButton()
             }
             .tabItem {
-                Label(localization.text(.home), systemImage: "house.fill")
+                Label(localization.text(.calendar), systemImage: "calendar")
             }
 
             NavigationStack {
-                WorkoutListView()
+                DashboardView()
+                    .settingsAccessButton()
             }
             .tabItem {
-                Label(localization.text(.workout), systemImage: "figure.strengthtraining.traditional")
-            }
-
-            NavigationStack {
-                MealListView()
-            }
-            .tabItem {
-                Label(localization.text(.meal), systemImage: "fork.knife")
-            }
-
-            NavigationStack {
-                BodyWeightListView()
-            }
-            .tabItem {
-                Label(localization.text(.bodyWeight), systemImage: "scalemass.fill")
+                Label(localization.text(.dashboard), systemImage: "chart.xyaxis.line")
             }
         }
         .environment(\.locale, localization.locale)
-        .settingsAccessButton()
         .peakScreenBackground()
     }
 }
